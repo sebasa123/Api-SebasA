@@ -9,6 +9,7 @@ namespace Api_SebasA.Models
         {
             Albums = new HashSet<Album>();
             Cancions = new HashSet<Cancion>();
+            LogMusicas = new HashSet<LogMusica>();
         }
 
         public int Idban { get; set; }
@@ -20,5 +21,6 @@ namespace Api_SebasA.Models
         public virtual Artista BanXartFkNavigation { get; set; } = null!;
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Cancion> Cancions { get; set; }
+        public virtual ICollection<LogMusica> LogMusicas { get; set; }
     }
 }

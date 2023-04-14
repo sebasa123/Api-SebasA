@@ -22,6 +22,7 @@ namespace Api_SebasA.Models
         public virtual DbSet<Cancion> Cancions { get; set; } = null!;
         public virtual DbSet<CodigoRecuperacion> CodigoRecuperacions { get; set; } = null!;
         public virtual DbSet<Genero> Generos { get; set; } = null!;
+        public virtual DbSet<LogMusica> LogMusicas { get; set; } = null!;
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
@@ -29,8 +30,8 @@ namespace Api_SebasA.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("SERVER=LAPTOP-0OCE7TFC\\SQLEXPRESS;DATABASE=BD_PROY_P6;INTEGRATED SECURITY=TRUE;User Id=;Password=");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("SERVER=LAPTOP-0OCE7TFC\\SQLEXPRESS;DATABASE=BD_PROY_P6;INTEGRATED SECURITY=TRUE;User Id=;Password=");
             }
         }
 
@@ -180,6 +181,70 @@ namespace Api_SebasA.Models
                 entity.Property(e => e.DescripcionGen).HasMaxLength(180);
 
                 entity.Property(e => e.NombreGen).HasMaxLength(40);
+            });
+
+            modelBuilder.Entity<LogMusica>(entity =>
+            {
+                entity.HasKey(e => e.Idlog)
+                    .HasName("PK__LogMusic__95D00208265E7D45");
+
+                entity.ToTable("LogMusica");
+
+                entity.Property(e => e.Idlog).HasColumnName("IDLog");
+
+                entity.Property(e => e.DescLog)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FechaLog).HasColumnType("datetime");
+
+                entity.Property(e => e.IdalbFk).HasColumnName("IDAlbFK");
+
+                entity.Property(e => e.IdartFk).HasColumnName("IDArtFK");
+
+                entity.Property(e => e.IdbanFk).HasColumnName("IDBanFK");
+
+                entity.Property(e => e.IdcanFk).HasColumnName("IDCanFK");
+
+                entity.Property(e => e.IdgenFk).HasColumnName("IDGenFK");
+
+                entity.Property(e => e.IdusFk).HasColumnName("IDUsFK");
+
+                entity.HasOne(d => d.IdalbFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdalbFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDAlb__49C3F6B7");
+
+                entity.HasOne(d => d.IdartFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdartFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDArt__4AB81AF0");
+
+                entity.HasOne(d => d.IdbanFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdbanFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDBan__4BAC3F29");
+
+                entity.HasOne(d => d.IdcanFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdcanFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDCan__4CA06362");
+
+                entity.HasOne(d => d.IdgenFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdgenFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDGen__4D94879B");
+
+                entity.HasOne(d => d.IdusFkNavigation)
+                    .WithMany(p => p.LogMusicas)
+                    .HasForeignKey(d => d.IdusFk)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__LogMusica__IDUsF__4E88ABD4");
             });
 
             modelBuilder.Entity<TipoUsuario>(entity =>

@@ -8,6 +8,7 @@ namespace Api_SebasA.Models
         public Album()
         {
             Cancions = new HashSet<Cancion>();
+            LogMusicas = new HashSet<LogMusica>();
         }
 
         public int Idalb { get; set; }
@@ -24,5 +25,6 @@ namespace Api_SebasA.Models
         public virtual Banda? AlbXbanFkNavigation { get; set; }
         public virtual Genero AlbXgenFkNavigation { get; set; } = null!;
         public virtual ICollection<Cancion> Cancions { get; set; }
+        public virtual ICollection<LogMusica> LogMusicas { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace Api_SebasA.Controllers
         public UsuariosController(BD_PROY_P6Context context)
         {
             _context = context;
+            MyCryto = new Crypto();
         }
 
         // GET: api/Usuarios

@@ -5,6 +5,11 @@ namespace Api_SebasA.Models
 {
     public partial class Cancion
     {
+        public Cancion()
+        {
+            LogMusicas = new HashSet<LogMusica>();
+        }
+
         public int Idcan { get; set; }
         public int? CanXalbFk { get; set; }
         public int CanXgenFk { get; set; }
@@ -19,5 +24,6 @@ namespace Api_SebasA.Models
         public virtual Artista CanXartFkNavigation { get; set; } = null!;
         public virtual Banda? CanXbanFkNavigation { get; set; }
         public virtual Genero CanXgenFkNavigation { get; set; } = null!;
+        public virtual ICollection<LogMusica> LogMusicas { get; set; }
     }
 }
