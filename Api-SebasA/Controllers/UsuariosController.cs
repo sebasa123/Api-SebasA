@@ -107,7 +107,25 @@ namespace Api_SebasA.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            string contra = "";
+            if (usuario.ContraUs.Length <= 60)
+            {
+                contra = MyCryto.EncriptarEnUnSentido(usuario.ContraUs);
+            }
+            else 
+            {
+                contra = usuario.ContraUs;
+            }
+
+            Usuario UsuarioNuevo = new()
+            {
+                Idus = usuario.Idus,
+                NombreUs = usuario.NombreUs,
+                ContraUs = usuario.ContraUs,
+                EstadoUs = usuario.EstadoUs,
+            };
+
+            _context.Entry(UsuarioNuevo).State = EntityState.Modified;
 
             try
             {
