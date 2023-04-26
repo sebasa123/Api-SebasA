@@ -143,7 +143,7 @@ namespace Api_SebasA.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Usuarios
